@@ -10,10 +10,6 @@ export default function Home() {
         <Navbar/>
         <div className="max-w-screen-xl mx-auto overflow-hidden">
           <Hero/>
-          <Apps/>
-          <Comparision/>
-          <Stats/>
-          <People/>
         </div>
           <Footer/>
         <svg className='absolute top-0 left-0 bottom-0 right-0 opacity-20 ' width="100%" height="100%">
