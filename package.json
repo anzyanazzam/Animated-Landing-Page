@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "swiper": "^10.0.0"
+  }, 
+  "dependencies": {
     "clsx": "^2.1.0",
     "framer-motion": "^11.1.5",
     "next": "14.2.2",
