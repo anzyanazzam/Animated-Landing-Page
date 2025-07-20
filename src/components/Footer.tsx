@@ -19,27 +19,29 @@ function Footer({}: Props) {
     <div className='dark'>
       <footer className='bg-zinc-50 dark:bg-black text-zinc-700 dark:text-zinc-400 text-sm z-20'>
         <hr className="w-full border-none h-px bg-gradient-to-r from-black/0 via-black/20 to-black/0 dark:from-white/0 dark:via-white/25 dark:to-white/0 " />
-        
+
         <div className='w-full max-w-screen-xl mx-auto px-4 sm:px-8 lg:px-16 py-24 flex flex-col gap-16'>
 
           {/* Galeri Dokumentasi */}
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Dokumentasi Kegiatan</h3>
-            <div className="flex gap-4 overflow-x-auto scroll-smooth pb-2 snap-x snap-mandatory">
-              {galleryImages.map((src, index) => (
-                <div
-                  key={index}
-                  className="snap-start shrink-0 w-[300px] aspect-video bg-zinc-800 rounded-lg overflow-hidden shadow-md transform rotate-[2deg]"
-                >
-                  <Image
-                    src={src}
-                    alt={`Dokumentasi ${index + 1}`}
-                    width={300}
-                    height={200}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
+            <div className="w-full overflow-x-auto pb-2">
+              <div className="flex gap-4 min-w-max touch-pan-x">
+                {galleryImages.map((src, index) => (
+                  <div
+                    key={index}
+                    className="shrink-0 w-[300px] aspect-video bg-zinc-800 rounded-lg overflow-hidden shadow-md transform rotate-[2deg]"
+                  >
+                    <Image
+                      src={src}
+                      alt={`Dokumentasi ${index + 1}`}
+                      width={300}
+                      height={200}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -54,11 +56,11 @@ function Footer({}: Props) {
                   height={32}
                   className="h-8 w-auto object-contain"
                 />
-                <span className='font-bold text-2xl text-white'>Techy</span>
+                <span className='font-bold text-2xl text-white'>.</span>
               </a>
               <p className="leading-relaxed my-6">
                 MIT Licensed<br />
-                Copyright © 2024 Techy Technologies Inc.
+                Copyright © 2025.
               </p>
             </div>
 
