@@ -1,5 +1,8 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
 
 type Props = {}
 
@@ -18,25 +21,32 @@ function Footer({}: Props) {
     <div className='dark'>
       <footer className='bg-zinc-50 dark:bg-black text-zinc-700 dark:text-zinc-400 text-sm z-20'>
         <hr className="w-full border-none h-px bg-gradient-to-r from-black/0 via-black/20 to-black/0 dark:from-white/0 dark:via-white/25 dark:to-white/0 " />
-
+        
         <div className='w-full max-w-screen-xl mx-auto px-4 sm:px-8 lg:px-16 py-24 flex flex-col gap-16'>
 
           {/* Galeri Dokumentasi */}
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Dokumentasi Kegiatan</h3>
-            <div className="flex overflow-x-auto gap-4 pb-2">
+            <Swiper
+              spaceBetween={20}
+              slidesPerView={'auto'}
+              grabCursor={true}
+              className="pb-4"
+            >
               {galleryImages.map((src, index) => (
-                <div key={index} className="min-w-[250px] max-w-[300px] aspect-video bg-zinc-800 rounded-lg overflow-hidden shadow-md transform rotate-[2deg]">
-                  <Image
-                    src={src}
-                    alt={`Dokumentasi ${index + 1}`}
-                    width={300}
-                    height={200}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <SwiperSlide key={index} style={{ width: '300px' }}>
+                  <div className="aspect-video bg-zinc-800 rounded-lg overflow-hidden shadow-md">
+                    <Image
+                      src={src}
+                      alt={`Dokumentasi ${index + 1}`}
+                      width={300}
+                      height={200}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           </div>
 
           {/* Logo & Info */}
@@ -54,13 +64,11 @@ function Footer({}: Props) {
               </a>
               <p className="leading-relaxed my-6">
                 MIT Licensed<br />
-                Copyright © 2025 MPKSTEMA.
+                Copyright © 2025.
               </p>
             </div>
-
-            {/* Navigasi lainnya */}
             <div className='flex flex-wrap sm:gap-x-12 gap-y-6 sm:mt-0'>
-              {/* Tempatkan navigasi di sini jika ada */}
+              {/* Link tambahan */}
             </div>
           </div>
 
