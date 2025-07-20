@@ -32,11 +32,11 @@ function Footer({}: Props) {
                   height={32}
                   className="h-8 w-auto object-contain"
                 />
-                <span className='font-bold text-2xl text-white'>Techy</span>
+                <span className='font-bold text-2xl text-white'>.</span>
               </a>
               <p className="leading-relaxed my-6">
                 MIT Licensed<br />
-                Copyright © 2024 Techy Technologies Inc.
+                Copyright © 2025 IT MPK STEMS.
               </p>
             </div>
 
