@@ -21,31 +21,6 @@ function Footer({}: Props) {
 
         <div className='w-full max-w-screen-xl mx-auto px-4 sm:px-8 lg:px-16 py-24 flex flex-col gap-16'>
 
-          {/* Logo & Info */}
-          <div className='flex flex-col sm:flex-row gap-10 justify-between'>
-            <div>
-              <a href="/" className='z-50 flex items-center space-x-2'>
-                <Image
-                  src="/logo2.png"
-                  alt="Logo Techy"
-                  width={32}
-                  height={32}
-                  className="h-8 w-auto object-contain"
-                />
-                <span className='font-bold text-2xl text-white'>.</span>
-              </a>
-              <p className="leading-relaxed my-6">
-                MIT Licensed<br />
-                Copyright © 2025 IT MPK STEMS.
-              </p>
-            </div>
-
-            {/* Navigasi lainnya */}
-            <div className='flex flex-wrap sm:gap-x-12 gap-y-6 sm:mt-0'>
-              {/* Tempatkan navigasi di sini jika ada */}
-            </div>
-          </div>
-
           {/* Galeri Dokumentasi */}
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Dokumentasi Kegiatan</h3>
@@ -61,6 +36,31 @@ function Footer({}: Props) {
                   />
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Logo & Info */}
+          <div className='flex flex-col sm:flex-row gap-10 justify-between'>
+            <div>
+              <a href="/" className='z-50 flex items-center space-x-2'>
+                <Image
+                  src="/logo2.png"
+                  alt="Logo Techy"
+                  width={32}
+                  height={32}
+                  className="h-8 w-auto object-contain"
+                />
+                <span className='font-bold text-2xl text-white'>.</span>
+              </a>
+              <p className="leading-relaxed my-6">
+                MIT Licensed<br />
+                Copyright © 2025 MPKSTEMA.
+              </p>
+            </div>
+
+            {/* Navigasi lainnya */}
+            <div className='flex flex-wrap sm:gap-x-12 gap-y-6 sm:mt-0'>
+              {/* Tempatkan navigasi di sini jika ada */}
             </div>
           </div>
 
