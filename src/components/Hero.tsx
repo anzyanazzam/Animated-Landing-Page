@@ -91,7 +91,7 @@ function Hero({}: Props) {
             ].map((text, i) => (
               <motion.li key={i} variants={list} className='flex gap-3'>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current h-5 shrink-0 mt-0.5">
-                  <path d="M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
+                  <path d="M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.2-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
                 </svg>
                 <span>{text}</span>
               </motion.li>
@@ -114,10 +114,10 @@ function Hero({}: Props) {
       {/* Galeri Dokumentasi */}
       <div className="mt-16">
         <h3 className="text-white text-lg font-semibold mb-4">Dokumentasi Kegiatan</h3>
-        <div className="w-full overflow-x-auto pb-2">
-          <div className="flex gap-4 min-w-max touch-pan-x">
+        <div className="w-full overflow-x-auto pb-2 scrollbar-hide"> {/* Added scrollbar-hide for aesthetics */}
+          <div className="flex gap-4 min-w-max touch-pan-x snap-x snap-mandatory"> {/* Added snap properties */}
             {galleryImages.map((src, index) => (
-              <div key={index} className="shrink-0 w-[300px] aspect-video bg-zinc-800 rounded-lg overflow-hidden shadow-md transform rotate-[2deg]">
+              <div key={index} className="shrink-0 w-[300px] aspect-video bg-zinc-800 rounded-lg overflow-hidden shadow-md transform rotate-[2deg] snap-center"> {/* Added snap-center */}
                 <Image src={src} alt={`Dokumentasi ${index + 1}`} width={300} height={200} className="w-full h-full object-cover" />
               </div>
             ))}
