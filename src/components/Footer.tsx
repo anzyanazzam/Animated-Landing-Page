@@ -1,8 +1,6 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
-import { Swiper, SwiperSlide } from 'swiper'
-import 'swiper/css'
 
 type Props = {}
 
@@ -27,26 +25,22 @@ function Footer({}: Props) {
           {/* Galeri Dokumentasi */}
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Dokumentasi Kegiatan</h3>
-            <Swiper
-              spaceBetween={20}
-              slidesPerView={'auto'}
-              grabCursor={true}
-              className="pb-4"
-            >
+            <div className="flex gap-4 overflow-x-auto scroll-smooth pb-2 snap-x snap-mandatory">
               {galleryImages.map((src, index) => (
-                <SwiperSlide key={index} style={{ width: '300px' }}>
-                  <div className="aspect-video bg-zinc-800 rounded-lg overflow-hidden shadow-md">
-                    <Image
-                      src={src}
-                      alt={`Dokumentasi ${index + 1}`}
-                      width={300}
-                      height={200}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </SwiperSlide>
+                <div
+                  key={index}
+                  className="snap-start shrink-0 w-[300px] aspect-video bg-zinc-800 rounded-lg overflow-hidden shadow-md transform rotate-[2deg]"
+                >
+                  <Image
+                    src={src}
+                    alt={`Dokumentasi ${index + 1}`}
+                    width={300}
+                    height={200}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               ))}
-            </Swiper>
+            </div>
           </div>
 
           {/* Logo & Info */}
@@ -60,15 +54,17 @@ function Footer({}: Props) {
                   height={32}
                   className="h-8 w-auto object-contain"
                 />
-                <span className='font-bold text-2xl text-white'>.</span>
+                <span className='font-bold text-2xl text-white'>Techy</span>
               </a>
               <p className="leading-relaxed my-6">
                 MIT Licensed<br />
-                Copyright © 2025.
+                Copyright © 2024 Techy Technologies Inc.
               </p>
             </div>
+
+            {/* Navigasi */}
             <div className='flex flex-wrap sm:gap-x-12 gap-y-6 sm:mt-0'>
-              {/* Link tambahan */}
+              {/* Link navigasi bisa ditambahkan di sini */}
             </div>
           </div>
 
