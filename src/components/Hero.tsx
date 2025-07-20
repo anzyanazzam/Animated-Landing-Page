@@ -3,7 +3,6 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-// Komponen efek mengetik dengan durasi lebih lama
 const TypewriterText = ({ texts, className }: { texts: string[], className?: string }) => {
   const [displayedText, setDisplayedText] = useState('')
   const [index, setIndex] = useState(0)
@@ -52,24 +51,22 @@ type Props = {}
 function Hero({}: Props) {
   const wrapper = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.25 }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.25 } }
   }
 
   const list = {
     hidden: { opacity: 0, x: -100 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5, ease: [0.455, 0.03, 0.515, 0.955], delay: 1 }
-    }
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.455, 0.03, 0.515, 0.955], delay: 1 } }
   }
 
   const container = {
     visible: { transition: { staggerChildren: 0.025 } }
   }
+
+  const galleryImages = [
+    '/docs1.jpg', '/docs2.jpg', '/docs3.jpg',
+    '/docs4.jpg', '/docs5.jpg', '/docs6.jpg', '/docs7.jpg'
+  ]
 
   return (
     <div className='w-full px-4 sm:px-8 lg:px-16 pt-20'>
@@ -86,7 +83,12 @@ function Hero({}: Props) {
           </motion.h1>
 
           <motion.ul initial='hidden' animate='visible' variants={wrapper} className='text-white space-y-2'>
-            {['Mewakili suara siswa secara adil', 'Menjadi penghubung antara siswa dan guru', 'Membentuk lingkungan belajar yang positif', 'Mendorong kegiatan yang membangun'].map((text, i) => (
+            {[
+              'Mewakili suara siswa secara adil',
+              'Menjadi penghubung antara siswa dan guru',
+              'Membentuk lingkungan belajar yang positif',
+              'Mendorong kegiatan yang membangun'
+            ].map((text, i) => (
               <motion.li key={i} variants={list} className='flex gap-3'>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current h-5 shrink-0 mt-0.5">
                   <path d="M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
@@ -107,27 +109,19 @@ function Hero({}: Props) {
             </a>
           </motion.div>
         </div>
+      </div>
 
-        <div className='hidden md:block pt-3 shrink grow overflow-hidden z-50'>
-          <motion.div initial={{ opacity: 0, x: -300 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 1.5 }} className='relative'>
-            <div className='relative p-px overflow-hidden rounded-3xl sm:rounded-[2rem] bg-gradient-to-br from-white to-zinc-600'>
-              <div className='rounded-3xl sm:rounded-[31px] overflow-hidden p-1.5 bg-gradient-to-br from-zinc-400 to-zinc-700'>
-                <div className='rounded-[17px] sm:rounded-[25px] overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-950'>
-                  <Image src='/image1.webp' className='object-cover object-center' width={1000} height={1000} alt='Hero-Image' />
-                  <div className='absolute inset-0 bg-black/30 flex items-center justify-center'>
-                    <button className='inline-flex h-10 rounded-xl p-px bg-gradient-to-br from-[#84B2E5] to-[#2F6EB1] shadow-lg'>
-                      <div className='flex h-full items-center gap-2 px-6 font-medium rounded-[11px] bg-gradient-to-br from-[#4B91DE] to-[#276AB2] text-white button-hover'>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className="fill-current h-3.5">
-                          <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
-                        </svg>
-                        <span>Lihat Video</span>
-                      </div>
-                    </button>
-                  </div>
-                </div>
+      {/* Galeri Dokumentasi */}
+      <div className="mt-16">
+        <h3 className="text-white text-lg font-semibold mb-4">Dokumentasi Kegiatan</h3>
+        <div className="w-full overflow-x-auto pb-2">
+          <div className="flex gap-4 min-w-max touch-pan-x">
+            {galleryImages.map((src, index) => (
+              <div key={index} className="shrink-0 w-[300px] aspect-video bg-zinc-800 rounded-lg overflow-hidden shadow-md transform rotate-[2deg]">
+                <Image src={src} alt={`Dokumentasi ${index + 1}`} width={300} height={200} className="w-full h-full object-cover" />
               </div>
-            </div>
-          </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
