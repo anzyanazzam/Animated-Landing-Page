@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export",
+    "analyze": "ANALYZE=true npm run build",
+    "clean": "rm -rf .next out",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "swiper": "^10.0.0"

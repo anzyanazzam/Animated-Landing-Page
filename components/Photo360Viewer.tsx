@@ -1,0 +1,215 @@
+'use client';
+
+import React, { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+
+const Photo360Viewer = () => {
+  const photos360 = [
+    { id: 1, src: '/images/photo3601.jpg', title: 'Photo 1' },
+    { id: 2, src: '/images/photo3602.jpg', title: 'Photo 2' },
+    { id: 3, src: '/images/photo3603.jpg', title: 'Photo 3' },
+    { id: 4, src: '/images/photo3604.jpg', title: 'Photo 4' },
+    { id: 5, src: '/images/photo3605.jpg', title: 'Photo 5' },
+    { id: 6, src: '/images/photo3606.jpg', title: 'Photo 6' },
+    { id: 7, src: '/images/photo3607.jpg', title: 'Photo 7' },
+  ];
+
+  const [selectedPhoto, setSelectedPhoto] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [rotation, setRotation] = useState(0);
+  const [startX, setStartX] = useState(0);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.clientX);
+    e.preventDefault();
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const deltaX = e.clientX - startX;
+    setRotation(prev => prev + deltaX * 0.5);
+    setStartX(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+    e.preventDefault();
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const deltaX = e.touches[0].clientX - startX;
+    setRotation(prev => prev + deltaX * 0.5);
+    setStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  // Auto-rotate when not dragging
+  useEffect(() => {
+    if (isDragging) return;
+    
+    const interval = setInterval(() => {
+      setRotation(prev => prev + 0.5);
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [isDragging]);
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="py-16 md:py-24 bg-gray-900/50"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white mb-12"
+        >
+          Foto 360° Interaktif
+        </motion.h2>
+        
+        {/* Current Photo Title */}
+        <motion.h3
+          key={selectedPhoto}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-xl md:text-2xl font-semibold text-center text-gray-300 mb-8"
+        >
+          {photos360[selectedPhoto].title}
+        </motion.h3>
+        
+        {/* 360 Photo Viewer */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <div
+            ref={imageRef}
+            className="relative h-64 md:h-96 lg:h-[500px] rounded-2xl overflow-hidden bg-gray-800 cursor-grab active:cursor-grabbing select-none"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <motion.div
+              className="absolute inset-0"
+              style={{
+                transform: `rotateY(${rotation}deg)`,
+                transformStyle: 'preserve-3d',
+              }}
+              transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+            >
+              <Image
+                src={photos360[selectedPhoto].src}
+                alt={photos360[selectedPhoto].title}
+                fill
+                className="object-cover"
+                draggable={false}
+                onError={(e) => {
+                  e.currentTarget.src = `data:image/svg+xml;base64,${btoa(`
+                    <svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="800" height="400" fill="#374151"/>
+                      <circle cx="400" cy="200" r="50" fill="#6B7280"/>
+                      <text x="400" y="280" font-family="Arial" font-size="18" fill="#9CA3AF" text-anchor="middle">Foto 360° ${selectedPhoto + 1}</text>
+                      <text x="400" y="300" font-family="Arial" font-size="14" fill="#6B7280" text-anchor="middle">Drag untuk memutar</text>
+                    </svg>
+                  `)}`;
+                }}
+              />
+            </motion.div>
+            
+            {/* Drag Instruction */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm backdrop-blur-sm">
+              {isDragging ? 'Memutar...' : 'Drag untuk memutar 360°'}
+            </div>
+          </div>
+        </div>
+        
+        {/* Photo Selection Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 max-w-6xl mx-auto">
+          {photos360.map((photo, index) => (
+            <motion.button
+              key={photo.id}
+              onClick={() => {
+                setSelectedPhoto(index);
+                setRotation(0); // Reset rotation when switching photos
+              }}
+              className={`relative aspect-square rounded-xl overflow-hidden transition-all duration-300 ${
+                index === selectedPhoto
+                  ? 'ring-4 ring-red-500 scale-105'
+                  : 'ring-2 ring-gray-600 hover:ring-gray-400 hover:scale-105'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.title}
+                fill
+                className="object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = `data:image/svg+xml;base64,${btoa(`
+                    <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="200" height="200" fill="#374151"/>
+                      <circle cx="100" cy="100" r="30" fill="#6B7280"/>
+                      <text x="100" y="150" font-family="Arial" font-size="14" fill="#9CA3AF" text-anchor="middle">${photo.title}</text>
+                    </svg>
+                  `)}`;
+                }}
+              />
+              
+              {/* Title Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                <p className="text-white text-xs md:text-sm font-medium text-center">
+                  {photo.title}
+                </p>
+              </div>
+              
+              {/* 360° Indicator */}
+              <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                360°
+              </div>
+            </motion.button>
+          ))}
+        </div>
+        
+        {/* Instructions */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mt-8"
+        >
+          <p className="text-gray-400 text-sm md:text-base">
+            Klik pada foto untuk memilih, lalu drag pada foto besar untuk melihat sudut 360°
+          </p>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+};
+
+export default Photo360Viewer;
