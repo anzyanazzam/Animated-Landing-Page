@@ -9,16 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "swiper": "^10.0.0"
-  }, 
-  "dependencies": {
-    "clsx": "^2.1.0",
-    "framer-motion": "^11.1.5",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.18.2",
     "next": "14.2.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-photo-sphere-viewer": "^6.2.3",
+    "react-simple-typewriter": "^4.0.5",
     "recharts": "^2.12.5",
-    "tailwind-merge": "^2.3.0"
+    "swiper": "^11.2.10",
+    "tailwind-merge": "^2.6.0",
+    "three": "^0.178.0"
   },
   "devDependencies": {
     "@types/node": "^20",

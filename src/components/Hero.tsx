@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import Photo360Gallery from './Photo360Gallery'
 import { motion } from 'framer-motion'
 
 const TypewriterText = ({ texts, className }: { texts: string[], className?: string }) => {
@@ -98,16 +99,8 @@ function Hero({}: Props) {
             ))}
           </motion.ul>
 
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, delay: 1.5 }} className='mt-10 flex flex-col items-center sm:flex-row gap-3'>
-            <a href="/" className='inline-flex relative z-10 h-10 rounded-xl p-px shadow-lg bg-gradient-to-b from-white to-zinc-300'>
-              <div className='flex items-center gap-1 px-6 font-medium rounded-xl whitespace-nowrap bg-white text-black'>
-                <span>Gabung Sekarang</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="fill-current h-3.5">
-                  <path d="M429.8 273l17-17-17-17L276.2 85.4l-17-17-33.9 33.9 17 17L354.9 232 24 232 0 232l0 48 24 0 330.8 0L242.2 392.6l-17 17 33.9 33.9 17-17L429.8 273z" />
-                </svg>
-              </div>
-            </a>
-          </motion.div>
+          {/* Tombol CTA Gabung – akan muncul setelah seluruh konten */}
+          {/* Akan dipindahkan ke bawah */}
         </div>
       </div>
 
@@ -125,6 +118,21 @@ function Hero({}: Props) {
           </div>
         </div>
       </div>
+
+      {/* Section galeri 360° */}
+      <Photo360Gallery />
+
+      {/* Tombol CTA Gabung */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, delay: 2 }} className='mt-10 flex flex-col items-center sm:flex-row gap-3'>
+        <a href="https://google.com" target="_blank" rel="noopener noreferrer" className='inline-flex relative z-10 h-10 rounded-xl p-px shadow-lg bg-gradient-to-b from-red-400 to-red-600 hover:to-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500'>
+          <div className='flex items-center gap-1 px-6 font-medium rounded-xl whitespace-nowrap bg-red-600/90 text-white'>
+            <span>Gabung Sekarang</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="fill-current h-3.5">
+              <path d="M429.8 273l17-17-17-17L276.2 85.4l-17-17-33.9 33.9 17 17L354.9 232 24 232l0 48 24 0 330.8 0L242.2 392.6l-17 17 33.9 33.9 17-17L429.8 273z" />
+            </svg>
+          </div>
+        </a>
+      </motion.div>
     </div>
   )
 }
