@@ -54,7 +54,6 @@ const Photo360Viewer = () => {
     setIsDragging(false);
   };
 
-  // Auto-rotate when not dragging
   useEffect(() => {
     if (isDragging) return;
     
@@ -84,7 +83,6 @@ const Photo360Viewer = () => {
           Foto 360° Interaktif
         </motion.h2>
         
-        {/* Current Photo Title */}
         <motion.h3
           key={selectedPhoto}
           initial={{ opacity: 0, y: 20 }}
@@ -95,7 +93,6 @@ const Photo360Viewer = () => {
           {photos360[selectedPhoto].title}
         </motion.h3>
         
-        {/* 360 Photo Viewer */}
         <div className="max-w-4xl mx-auto mb-12">
           <div
             ref={imageRef}
@@ -125,21 +122,19 @@ const Photo360Viewer = () => {
               </div>
             </motion.div>
             
-            {/* Drag Instruction */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm backdrop-blur-sm">
               {isDragging ? 'Memutar...' : 'Drag untuk memutar 360°'}
             </div>
           </div>
         </div>
         
-        {/* Photo Selection Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 max-w-6xl mx-auto">
           {photos360.map((photo, index) => (
             <motion.button
               key={photo.id}
               onClick={() => {
                 setSelectedPhoto(index);
-                setRotation(0); // Reset rotation when switching photos
+                setRotation(0);
               }}
               className={`relative aspect-square rounded-xl overflow-hidden transition-all duration-300 ${
                 index === selectedPhoto
@@ -162,7 +157,6 @@ const Photo360Viewer = () => {
                 </div>
               </div>
               
-              {/* 360° Indicator */}
               <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
                 360°
               </div>
@@ -170,7 +164,6 @@ const Photo360Viewer = () => {
           ))}
         </div>
         
-        {/* Instructions */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

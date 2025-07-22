@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 
 const PhotoSlider = () => {
   const photos = [
@@ -18,7 +17,6 @@ const PhotoSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
 
-  // Auto-play functionality
   useEffect(() => {
     if (!isAutoPlay) return;
     
@@ -34,21 +32,18 @@ const PhotoSlider = () => {
     setCurrentIndex((prevIndex) => 
       prevIndex === 0 ? photos.length - 1 : prevIndex - 1
     );
-    // Resume auto-play after 10 seconds
     setTimeout(() => setIsAutoPlay(true), 10000);
   };
 
   const goToNext = () => {
     setIsAutoPlay(false);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % photos.length);
-    // Resume auto-play after 10 seconds
     setTimeout(() => setIsAutoPlay(true), 10000);
   };
 
   const goToSlide = (index: number) => {
     setIsAutoPlay(false);
     setCurrentIndex(index);
-    // Resume auto-play after 10 seconds
     setTimeout(() => setIsAutoPlay(true), 10000);
   };
 
@@ -72,7 +67,6 @@ const PhotoSlider = () => {
         </motion.h2>
         
         <div className="relative max-w-4xl mx-auto">
-          {/* Main Slider */}
           <div className="relative h-64 md:h-96 lg:h-[500px] rounded-2xl overflow-hidden bg-gray-800">
             <AnimatePresence mode="wait">
               <motion.div
@@ -93,23 +87,27 @@ const PhotoSlider = () => {
               </motion.div>
             </AnimatePresence>
             
-            {/* Navigation Arrows */}
             <button
               onClick={goToPrevious}
               className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 md:p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
+              aria-label="Previous photo"
             >
-              ←
+              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
             </button>
             
             <button
               onClick={goToNext}
               className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 md:p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
+              aria-label="Next photo"
             >
-              →
+              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </button>
           </div>
           
-          {/* Dots Indicator */}
           <div className="flex justify-center space-x-2 mt-6">
             {photos.map((_, index) => (
               <button
@@ -120,6 +118,7 @@ const PhotoSlider = () => {
                     ? 'bg-red-500 scale-110'
                     : 'bg-gray-600 hover:bg-gray-500'
                 }`}
+                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>

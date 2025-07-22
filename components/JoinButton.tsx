@@ -48,10 +48,8 @@ const JoinButton = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          {/* Background gradient animation */}
           <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
           
-          {/* Button content */}
           <span className="relative flex items-center space-x-2">
             <span>Gabung Sekarang</span>
             <motion.div
@@ -59,12 +57,13 @@ const JoinButton = () => {
               animate={{ x: [0, 4, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              →
+              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </motion.div>
           </span>
         </motion.button>
         
-        {/* Decorative elements */}
         <div className="relative mt-16">
           <motion.div
             className="absolute left-1/2 top-0 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent"
@@ -87,7 +86,6 @@ const JoinButton = () => {
           </motion.div>
         </div>
         
-        {/* Floating particles animation */}
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(6)].map((_, i) => (
             <motion.div

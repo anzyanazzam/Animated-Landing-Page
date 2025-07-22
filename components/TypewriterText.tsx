@@ -22,14 +22,13 @@ const TypewriterText = () => {
         const timeout = setTimeout(() => {
           setDisplayedText(currentText.slice(0, charIndex + 1));
           setCharIndex(charIndex + 1);
-        }, 80); // Kecepatan mengetik
+        }, 80);
         
         return () => clearTimeout(timeout);
       } else {
-        // Selesai mengetik, tunggu sebelum menghapus
         const timeout = setTimeout(() => {
           setIsTyping(false);
-        }, 3000); // Delay sebelum menghapus (3 detik)
+        }, 3000);
         
         return () => clearTimeout(timeout);
       }
@@ -38,15 +37,14 @@ const TypewriterText = () => {
         const timeout = setTimeout(() => {
           setDisplayedText(currentText.slice(0, charIndex - 1));
           setCharIndex(charIndex - 1);
-        }, 40); // Kecepatan menghapus
+        }, 40);
         
         return () => clearTimeout(timeout);
       } else {
-        // Selesai menghapus, pindah ke teks berikutnya
         const timeout = setTimeout(() => {
           setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
           setIsTyping(true);
-        }, 500); // Delay sebelum mulai mengetik teks baru
+        }, 500);
         
         return () => clearTimeout(timeout);
       }
