@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 
 const PhotoSlider = () => {
@@ -82,24 +81,15 @@ const PhotoSlider = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -300 }}
                 transition={{ duration: 0.5 }}
-                className="absolute inset-0"
+                className="absolute inset-0 bg-gray-700 flex items-center justify-center"
               >
-                <Image
-                  src={photos[currentIndex].src}
-                  alt={photos[currentIndex].alt}
-                  fill
-                  className="object-cover"
-                  onError={(e) => {
-                    // Fallback untuk gambar yang tidak ditemukan
-                    e.currentTarget.src = `data:image/svg+xml;base64,${btoa(`
-                      <svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="800" height="400" fill="#374151"/>
-                        <rect x="350" y="150" width="100" height="100" rx="8" fill="#6B7280"/>
-                        <text x="400" y="280" font-family="Arial" font-size="18" fill="#9CA3AF" text-anchor="middle">Dokumentasi ${currentIndex + 1}</text>
-                      </svg>
-                    `)}`;
-                  }}
-                />
+                <div className="text-white text-center">
+                  <div className="w-20 h-20 bg-gray-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-2xl">📷</span>
+                  </div>
+                  <p className="text-lg">Dokumentasi {currentIndex + 1}</p>
+                  <p className="text-sm text-gray-400 mt-2">Ganti dengan foto asli di /public/images/</p>
+                </div>
               </motion.div>
             </AnimatePresence>
             
@@ -108,14 +98,14 @@ const PhotoSlider = () => {
               onClick={goToPrevious}
               className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 md:p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
             >
-              <ChevronLeftIcon className="w-5 h-5 md:w-6 md:h-6" />
+              ←
             </button>
             
             <button
               onClick={goToNext}
               className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 md:p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
             >
-              <ChevronRightIcon className="w-5 h-5 md:w-6 md:h-6" />
+              →
             </button>
           </div>
           
@@ -131,38 +121,6 @@ const PhotoSlider = () => {
                     : 'bg-gray-600 hover:bg-gray-500'
                 }`}
               />
-            ))}
-          </div>
-          
-          {/* Thumbnail Strip (Hidden on mobile) */}
-          <div className="hidden md:flex justify-center space-x-2 mt-6 overflow-x-auto">
-            {photos.map((photo, index) => (
-              <motion.button
-                key={photo.id}
-                onClick={() => goToSlide(index)}
-                className={`relative w-20 h-16 rounded-lg overflow-hidden transition-all duration-200 ${
-                  index === currentIndex
-                    ? 'ring-2 ring-red-500 scale-105'
-                    : 'opacity-70 hover:opacity-100'
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = `data:image/svg+xml;base64,${btoa(`
-                      <svg width="80" height="64" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="80" height="64" fill="#374151"/>
-                        <rect x="30" y="22" width="20" height="20" rx="2" fill="#6B7280"/>
-                      </svg>
-                    `)}`;
-                  }}
-                />
-              </motion.button>
             ))}
           </div>
         </div>

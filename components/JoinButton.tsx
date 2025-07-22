@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
 
 const JoinButton = () => {
   const handleJoinClick = () => {
@@ -60,7 +59,7 @@ const JoinButton = () => {
               animate={{ x: [0, 4, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ArrowRightIcon className="w-5 h-5 md:w-6 md:h-6" />
+              →
             </motion.div>
           </span>
         </motion.button>

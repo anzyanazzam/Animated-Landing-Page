@@ -45,10 +45,6 @@ export default {
         'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
         'glass-inset': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.1)',
       },
-      background: {
-        'glass': 'rgba(255, 255, 255, 0.1)',
-        'glass-dark': 'rgba(0, 0, 0, 0.1)',
-      },
       screens: {
         'xs': '475px',
       },

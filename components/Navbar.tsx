@@ -35,17 +35,8 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="relative w-8 h-8 md:w-10 md:h-10">
-              <Image
-                src="/images/logo1.svg"
-                alt="MPK Logo"
-                fill
-                className="object-contain"
-                onError={(e) => {
-                  // Fallback jika gambar tidak ditemukan
-                  e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0VGNDQ0NCIvPgo8dGV4dCB4PSIyMCIgeT0iMjgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NPC90ZXh0Pgo8L3N2Zz4K';
-                }}
-              />
+            <div className="relative w-8 h-8 md:w-10 md:h-10 bg-red-500 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">M</span>
             </div>
             <motion.span 
               className="text-white text-xl md:text-2xl font-bold tracking-wide"
@@ -57,7 +48,6 @@ const Navbar = () => {
             </motion.span>
           </motion.div>
           
-          {/* Optional: Menu button for mobile (dapat ditambahkan jika diperlukan) */}
           <div className="hidden md:block">
             <motion.div
               initial={{ opacity: 0, x: 20 }}

@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 const Photo360Viewer = () => {
   const photos360 = [
@@ -110,30 +109,20 @@ const Photo360Viewer = () => {
             onTouchEnd={handleTouchEnd}
           >
             <motion.div
-              className="absolute inset-0"
+              className="absolute inset-0 bg-gray-700 flex items-center justify-center"
               style={{
                 transform: `rotateY(${rotation}deg)`,
                 transformStyle: 'preserve-3d',
               }}
               transition={{ type: 'spring', damping: 20, stiffness: 300 }}
             >
-              <Image
-                src={photos360[selectedPhoto].src}
-                alt={photos360[selectedPhoto].title}
-                fill
-                className="object-cover"
-                draggable={false}
-                onError={(e) => {
-                  e.currentTarget.src = `data:image/svg+xml;base64,${btoa(`
-                    <svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="800" height="400" fill="#374151"/>
-                      <circle cx="400" cy="200" r="50" fill="#6B7280"/>
-                      <text x="400" y="280" font-family="Arial" font-size="18" fill="#9CA3AF" text-anchor="middle">Foto 360° ${selectedPhoto + 1}</text>
-                      <text x="400" y="300" font-family="Arial" font-size="14" fill="#6B7280" text-anchor="middle">Drag untuk memutar</text>
-                    </svg>
-                  `)}`;
-                }}
-              />
+              <div className="text-white text-center">
+                <div className="w-20 h-20 bg-gray-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-3xl">🌐</span>
+                </div>
+                <p className="text-lg">Foto 360° {selectedPhoto + 1}</p>
+                <p className="text-sm text-gray-400 mt-2">Drag untuk memutar / Ganti dengan foto 360° asli</p>
+              </div>
             </motion.div>
             
             {/* Drag Instruction */}
@@ -164,27 +153,13 @@ const Photo360Viewer = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Image
-                src={photo.src}
-                alt={photo.title}
-                fill
-                className="object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = `data:image/svg+xml;base64,${btoa(`
-                    <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="200" height="200" fill="#374151"/>
-                      <circle cx="100" cy="100" r="30" fill="#6B7280"/>
-                      <text x="100" y="150" font-family="Arial" font-size="14" fill="#9CA3AF" text-anchor="middle">${photo.title}</text>
-                    </svg>
-                  `)}`;
-                }}
-              />
-              
-              {/* Title Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-                <p className="text-white text-xs md:text-sm font-medium text-center">
-                  {photo.title}
-                </p>
+              <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+                <div className="text-white text-center">
+                  <div className="w-8 h-8 bg-gray-600 rounded-full mx-auto mb-2 flex items-center justify-center">
+                    <span className="text-sm">🌐</span>
+                  </div>
+                  <p className="text-xs">{photo.title}</p>
+                </div>
               </div>
               
               {/* 360° Indicator */}
